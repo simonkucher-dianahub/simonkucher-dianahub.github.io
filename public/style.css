@@ -224,6 +224,73 @@ body {
   width: 100%;
 }
 
+/* About page team cards */
+
+.hero-page .content-card .team-heading {
+  margin-top: clamp(40px, 30vh, 72px);
+}
+
+.team-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.team-card {
+  background-color: #f4f4f6;
+  border-radius: 12px;
+  color: var(--charcoal);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.team-card img {
+  aspect-ratio: 1;
+  background-color: #e9e9ee;
+  display: block;
+  object-fit: cover;
+  object-position: top;
+  width: 100%;
+}
+
+.team-card-body {
+  flex: 1;
+  padding: 16px 18px 20px;
+}
+
+.team-card h2 {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.team-position {
+  color: var(--charcoal-muted);
+  font-size: 15px;
+  line-height: 1.4;
+  margin: 2px 0 0;
+}
+
+.team-location {
+  color: var(--charcoal-muted);
+  font-size: 14px;
+  line-height: 1.55;
+  margin: 10px 0 0;
+}
+
+.team-card:hover {
+  background-color: var(--brand-pink);
+  color: #ffffff;
+}
+
+.team-card:hover .team-position,
+.team-card:hover .team-location {
+  color: rgba(255, 255, 255, 0.85);
+}
+
 /* Help page contact blocks */
 
 .contact-block {
@@ -513,6 +580,10 @@ footer a:hover {
     opacity: 0.5;
     width: 100%;
   }
+
+  .team-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 600px) {
@@ -557,5 +628,9 @@ footer a:hover {
   .btn-primary {
     font-size: 15px;
     padding: 12px 14px;
+  }
+
+  .team-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }

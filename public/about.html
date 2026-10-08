@@ -8,6 +8,16 @@
     <title>About Diana · Dianahub</title>
     <link rel="icon" href="assets/www.simon-kucher.ico">
     <link rel="stylesheet" href="style.css">
+    <script>
+        // Swap missing team headshots for the default silhouette
+        document.addEventListener("error", function (event) {
+            var img = event.target;
+            if (img.tagName !== "IMG" || !img.closest(".team-card")) return;
+            if (img.getAttribute("src") === "assets/headshots/default.svg") return;
+            img.src = "assets/headshots/default.svg";
+            img.alt = "";
+        }, true);
+    </script>
 </head>
 
 <body>
@@ -36,12 +46,74 @@
                 <h1>Hello from Diana!</h1>
 
                 <p>We're a team of tech-minded consultants based in Latin America. Our goal is to make analysis faster,
-                smarter, and deeper. Through our project work, we've built tools and methods that uncover sharper
-                insights and automate tasks that aren't easily done in Excel. We're sharing them with the whole
-                Simon-Kucher family to hopefully help your projects run a little smoother and aim a little higher.</p>
+                    smarter, and deeper. Through our project work, we've built tools and methods that uncover sharper
+                    insights and automate tasks that aren't easily done in Excel. We're sharing them with the whole
+                    Simon-Kucher family to hopefully help your projects run a little smoother and aim a little higher.
+                </p>
 
-                Our name stands for Digital Analytics, and it's also a nod to La Diana Cazadora, the iconic Huntress
-                statue in Mexico City, who's been taking aim since 1942.
+                <p>Our name stands for Digital Analytics, and it's also a nod to La Diana Cazadora, the iconic Huntress
+                    statue in Mexico City, who's been taking aim since 1942.</p>
+
+                <h1 class="team-heading">Meet our team</h1>
+
+                <div class="team-grid">
+
+                    <article class="team-card">
+                        <img src="assets/headshots/6130_Carlos_Zink_872_PowerPoint_CV.jpg" alt="Carlos Zink">
+                        <div class="team-card-body">
+                            <h2>Carlos Zink</h2>
+                            <p class="team-position">Senior Director</p>
+                            <p class="team-location">AME – São Paulo</p>
+                        </div>
+                    </article>
+
+                    <article class="team-card">
+                        <img src="assets/headshots/default.svg" alt="">
+                        <div class="team-card-body">
+                            <h2>Jorge Reyes Garcia</h2>
+                            <p class="team-position">Director</p>
+                            <p class="team-location">AME – Mexico City</p>
+                        </div>
+                    </article>
+
+                    <article class="team-card">
+                        <img src="assets/headshots/10716_Pedro_Pires_Sulzer_1495_PowerPoint_CV.jpg"
+                            alt="Pedro Pires Sulzer">
+                        <div class="team-card-body">
+                            <h2>Pedro Pires Sulzer</h2>
+                            <p class="team-position">Senior Consultant</p>
+                            <p class="team-location">AME – São Paulo</p>
+                        </div>
+                    </article>
+
+                    <article class="team-card">
+                        <img src="assets/headshots/default.svg" alt="">
+                        <div class="team-card-body">
+                            <h2>David Cortina</h2>
+                            <p class="team-position">Consultant</p>
+                            <p class="team-location">AME – Mexico City</p>
+                        </div>
+                    </article>
+
+                    <article class="team-card">
+                        <img src="assets/headshots/default.svg" alt="">
+                        <div class="team-card-body">
+                            <h2>Sofia Moreno Lopez</h2>
+                            <p class="team-position">Software Consultant</p>
+                            <p class="team-location">AME – Mexico City</p>
+                        </div>
+                    </article>
+
+                    <article class="team-card">
+                        <img src="assets/headshots/default.svg" alt="">
+                        <div class="team-card-body">
+                            <h2>Nicolas Bdill</h2>
+                            <p class="team-position">Data Consultant</p>
+                            <p class="team-location">AME – Mexico City</p>
+                        </div>
+                    </article>
+
+                </div>
             </article>
         </main>
     </div>
