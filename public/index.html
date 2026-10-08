@@ -1,23 +1,117 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="GitLab Pages">
-    <title>Plain HTML site using GitLab Pages</title>
+    <title>DianaHub</title>
+    <link rel="icon" href="assets/www.simon-kucher.ico">
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <div class="navbar">
-      <a href="https://pages.gitlab.io/plain-html/">Plain HTML Example</a>
-      <a href="https://gitlab.com/pages/plain-html/">Repository</a>
-      <a href="https://gitlab.com/pages/">Other Examples</a>
+    <div class="hero">
+      <svg class="hero-diamonds" viewBox="0 0 960 780" preserveAspectRatio="xMaxYMax slice" aria-hidden="true">
+        <g class="outline">
+          <path d="M532 20 l157 157 -157 157 -157 -157z"/>
+          <path d="M712 200 l157 157 -157 157 -157 -157z"/>
+          <path d="M532 380 l157 157 -157 157 -157 -157z"/>
+          <path d="M172 380 l157 157 -157 157 -157 -157z"/>
+          <path d="M892 380 l157 157 -157 157 -157 -157z"/>
+          <path d="M712 560 l157 157 -157 157 -157 -157z"/>
+          <path d="M172 740 l157 157 -157 157 -157 -157z"/>
+          <path d="M532 740 l157 157 -157 157 -157 -157z"/>
+          <path d="M892 740 l157 157 -157 157 -157 -157z"/>
+        </g>
+        <path class="filled" d="M352 560 l157 157 -157 157 -157 -157z"/>
+      </svg>
+
+      <header class="navbar">
+        <div class="container navbar-inner">
+          <a class="navbar-brand" href="index.html">
+            <img src="assets/dianahub_logo.png" alt="DianaHub">
+          </a>
+
+          <nav class="navbar-links">
+            <a href="index.html">Solutions</a>
+            <a href="about.html">About Diana</a>
+            <a class="navbar-cta" href="help.html">Need help?</a>
+          </nav>
+        </div>
+      </header>
+
+      <main class="container hero-content">
+        <h1>DianaHub - Simon Kucher</h1>
+
+        <p class="lead">
+          Your home for Simon-Kucher's internal tools.
+        </p>
+
+        <a class="btn-primary" href="about.html">
+          Learn more
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10h13M11 5l5 5-5 5"/></svg>
+        </a>
+      </main>
     </div>
 
-    <h1>Hello World!</h1>
+    <section class="tools">
+      <div class="container tools-grid">
+        <article class="tool-card">
+          <img src="assets/placeholder.svg" alt="">
+          <div class="tool-card-body">
+            <ul class="tool-tags">
+              <li>Financial Services</li>
+              <li>+3 sectors</li>
+            </ul>
+            <h2>FactorStrat</h2>
+            <p>Find the drivers behind change in revenue or margin.</p>
+            <div class="tool-card-actions">
+              <a class="btn-primary" href="#">Install</a>
+              <a class="btn-secondary" href="#">Tutorial</a>
+            </div>
+          </div>
+        </article>
 
-    <p>
-      This is a simple plain-HTML website on GitLab Pages, without any fancy static site generator.
-    </p>
+        <article class="tool-card">
+          <img src="assets/placeholder.svg" alt="">
+          <div class="tool-card-body">
+            <ul class="tool-tags">
+              <li>Retail</li>
+            </ul>
+            <h2>Compol</h2>
+            <p>Coming to you soon.</p>
+            <div class="tool-card-actions">
+              <a class="btn-primary is-disabled" aria-disabled="true">Install</a>
+              <a class="btn-secondary is-disabled" aria-disabled="true">Tutorial</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tool-card">
+          <img src="assets/placeholder.svg" alt="">
+          <div class="tool-card-body">
+            <ul class="tool-tags">
+              <li>Financial Services</li>
+              <li>+3 sectors</li>
+            </ul>
+            <h2>FactorStrat</h2>
+            <p>Find the drivers behind change in revenue or margin.</p>
+            <div class="tool-card-actions">
+              <a class="btn-primary" href="#">Install</a>
+              <a class="btn-secondary" href="#">Tutorial</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <p>
+          <a href="https://gitlab.com/pages/plain-html/">About Diana</a> |
+          <a href="https://gitlab.com/pages/plain-html/">Downloads</a> |
+          <a href="https://gitlab.com/pages/">Need help?</a>
+        </p>
+      </div>
+    </footer>
   </body>
 </html>
-
