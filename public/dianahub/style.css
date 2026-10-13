@@ -622,6 +622,12 @@ body {
   box-shadow: 0 8px 24px rgba(27, 35, 41, 0.12);
 }
 
+.tool-card.is-disabled:hover {
+  background-color: #f6f6f8;
+  border-color: rgba(27, 35, 41, 0.06);
+  box-shadow: none;
+}
+
 .tool-icon {
   display: block;
   grid-row: 1 / -1;
