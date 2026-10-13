@@ -44,49 +44,54 @@
   </div>
 
   <section class="tools">
-    <div class="container tools-search">
-      <label class="visually-hidden" for="tool-search">Search tools</label>
-      <div class="tools-search-field">
-        <svg viewBox="0 0 20 20" aria-hidden="true">
-          <circle cx="8.5" cy="8.5" r="5.5" />
-          <path d="M13 13l4 4" />
-        </svg>
-        <input id="tool-search" type="search" placeholder="Search tools, sectors…" autocomplete="off">
+    <div class="container">
+      <div class="tools-inner">
+        <div class="tools-search">
+          <label class="visually-hidden" for="tool-search">Search tools</label>
+          <div class="tools-search-field">
+            <svg viewBox="0 0 20 20" aria-hidden="true">
+              <circle cx="8.5" cy="8.5" r="5.5" />
+              <path d="M13 13l4 4" />
+            </svg>
+            <input id="tool-search" type="search" placeholder="Search tools, sectors…" autocomplete="off">
+          </div>
+        </div>
+
+        <div class="tools-grid">
+          <article class="tool-card">
+            <img class="tool-icon" src="assets/icons/factorstrat.png" alt="">
+            <h2>FactorStrat</h2>
+            <p class="tool-desc">Find the drivers behind change in revenue or margin</p>
+            <div class="tool-card-actions">
+              <a class="btn-primary" href="downloads/local_factorstrat-unknown.zip" download>Download Installer</a>
+              <a class="btn-secondary is-disabled" aria-disabled="true">Tutorial</a>
+            </div>
+          </article>
+
+          <article class="tool-card">
+            <img class="tool-icon" src="assets/icons/compol.svg" alt="">
+            <h2>Compol</h2>
+            <p class="tool-desc">Coming to you next</p>
+            <div class="tool-card-actions">
+              <a class="btn-primary is-disabled" aria-disabled="true">Download Installer</a>
+              <a class="btn-secondary is-disabled" aria-disabled="true">Tutorial</a>
+            </div>
+          </article>
+        </div>
+
+        <p class="tools-empty" hidden>No tools match your search.</p>
       </div>
     </div>
-
-    <div class="container tools-grid">
-      <article class="tool-card">
-        <img class="tool-icon" src="assets/icons/factorstrat.png" alt="">
-        <h2>FactorStrat</h2>
-        <p class="tool-desc">Find the drivers behind change in revenue or margin</p>
-        <div class="tool-card-actions">
-          <a class="btn-primary" href="downloads/local_factorstrat-unknown.zip" download>Download Installer</a>
-          <a class="btn-secondary is-disabled" aria-disabled="true">Tutorial</a>
-        </div>
-      </article>
-
-      <article class="tool-card">
-        <img class="tool-icon" src="assets/icons/compol.svg" alt="">
-        <h2>Compol</h2>
-        <p class="tool-desc">Coming to you next</p>
-        <div class="tool-card-actions">
-          <a class="btn-primary is-disabled" aria-disabled="true">Download Installer</a>
-          <a class="btn-secondary is-disabled" aria-disabled="true">Tutorial</a>
-        </div>
-      </article>
-    </div>
-
-    <p class="container tools-empty" hidden>No tools match your search.</p>
   </section>
 
   <footer>
-    <div class="container">
-      <p>
-        <a href="about.html">About Diana</a> |
-        <a href="https://gitlab.com/pages/plain-html/">Downloads</a> |
+    <div class="container footer-inner">
+      <nav class="footer-links">
+        <a href="index.html">Tools</a>
+        <a href="about.html">About Diana</a>
         <a href="help.html">Need help?</a>
-      </p>
+      </nav>
+      <p class="footer-copyright">&copy; 2026 Simon-Kucher. All rights reserved.</p>
     </div>
   </footer>
 
