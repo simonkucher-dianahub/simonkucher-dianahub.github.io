@@ -225,95 +225,259 @@ body {
   width: 100%;
 }
 
-/* About page team cards */
+/* About page team */
 
 .hero-page .content-card .team-heading {
   margin-top: clamp(40px, 30vh, 72px);
 }
 
-.team-grid {
-  display: grid;
-  gap: 20px;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-
-.team-card {
-  background-color: #f4f4f6;
-  border-radius: 12px;
-  color: var(--charcoal);
+.team-group-heading {
+  align-items: center;
+  color: rgba(255, 255, 255, 0.72);
   display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  transition: background-color 0.15s ease, color 0.15s ease;
+  font-size: 13px;
+  font-weight: 700;
+  gap: 16px;
+  letter-spacing: 0.12em;
+  margin: 56px 0 20px;
+  text-transform: uppercase;
 }
 
-.team-card img {
-  aspect-ratio: 1;
-  background-color: #e9e9ee;
+.team-group-heading::after {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0));
+  content: "";
+  flex: 1;
+  height: 1px;
+}
+
+.team-heading + .team-group-heading {
+  margin-top: 0;
+}
+
+.team-member img {
+  background-color: #2b3142;
   display: block;
   object-fit: cover;
   object-position: top;
-  width: 100%;
 }
 
-.team-card-body {
-  flex: 1;
-  padding: 16px 18px 20px;
-}
-
-.team-card h2 {
+.team-name {
   font-size: 16px;
   font-weight: 700;
-  line-height: 1.4;
+  line-height: 1.3;
   margin: 0;
 }
 
-.team-position {
-  color: var(--charcoal-muted);
-  font-size: 15px;
+.team-position,
+.team-location {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 14px;
   line-height: 1.4;
   margin: 2px 0 0;
 }
 
 .team-location {
-  color: var(--charcoal-muted);
-  font-size: 14px;
-  line-height: 1.55;
-  margin: 10px 0 0;
+  font-size: 13px;
+  margin-top: 8px;
 }
 
-.team-card:hover {
+/* Photo cards, shared by every group; partial rows stay centered */
+
+.team-grid {
+  --team-cols: 4;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+}
+
+.team-grid > .team-member {
+  width: calc((100% - (var(--team-cols) - 1) * 16px) / var(--team-cols));
+}
+
+.team-member {
+  background-color: #1b1f2d;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(10, 12, 20, 0.25);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Photo fades into the card so the text sits on the shoulders, not the face */
+.team-member img {
+  aspect-ratio: 1;
+  -webkit-mask-image: linear-gradient(180deg, #000 75%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 75%, transparent 100%);
+  transition: transform 0.4s ease;
+  width: 100%;
+}
+
+.team-member .team-member-info {
+  margin-top: -22px;
+  padding: 0 16px 14px;
+  position: relative;
+}
+
+.team-member .team-location {
+  margin-top: 6px;
+}
+
+.team-member::after {
+  border: 2px solid transparent;
+  border-radius: inherit;
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+  transition: border-color 0.2s ease;
+}
+
+.team-member:hover img {
+  transform: scale(1.04);
+}
+
+.team-member:hover::after {
+  border-color: var(--diamond-pink);
+}
+
+/* Help page: one panel per topic, each with its contact person */
+
+/* A little wider than other pages so each panel's buttons fit on one row;
+   sized to its content rather than stretched to fill the page */
+.help-card {
+  flex: 0 0 auto;
+  max-width: 1080px;
+  min-height: 0;
+}
+
+.help-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.help-option {
+  background-color: rgba(23, 27, 39, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(20px, 3vw, 32px);
+  position: relative;
+  transition: border-color 0.2s ease;
+}
+
+.help-option::before {
   background-color: var(--brand-pink);
-  color: #ffffff;
+  border-radius: 8px 8px 0 0;
+  content: "";
+  height: 3px;
+  left: -1px;
+  position: absolute;
+  right: -1px;
+  top: -1px;
 }
 
-.team-card:hover .team-position,
-.team-card:hover .team-location {
-  color: rgba(255, 255, 255, 0.85);
+.help-option:hover {
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
-/* Help page contact blocks */
-
-.contact-block {
-  text-align: center;
+.help-topic {
+  align-items: center;
+  color: var(--diamond-pink);
+  display: flex;
+  font-size: 13px;
+  font-weight: 700;
+  gap: 8px;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  margin: 0 0 16px;
+  text-transform: uppercase;
 }
 
-.contact-block + .contact-block {
-  border-top: 1px solid rgba(255, 255, 255, 0.18);
-  margin-top: clamp(24px, 4vh, 40px);
-  padding-top: clamp(24px, 4vh, 40px);
+.help-topic svg,
+.help-tip svg {
+  fill: none;
+  flex: none;
+  height: 18px;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+  width: 18px;
 }
 
-.contact-block h2 {
+.help-option h2 {
   font-size: 22px;
   font-weight: 700;
   line-height: 1.3;
-  margin: 0 0 4px;
+  margin: 0 0 24px;
 }
 
-.contact-block p {
+/* Person row is pushed down so both panels' buttons line up */
+.help-person {
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  gap: 14px;
+  margin-top: auto;
+  padding: 20px 0;
+}
+
+.help-person img {
+  background-color: #2b3142;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  flex: none;
+  height: 52px;
+  object-fit: cover;
+  object-position: top;
+  width: 52px;
+}
+
+.help-person-name {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.help-person-role {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 14px;
+  line-height: 1.4;
+  margin: 2px 0 0;
+}
+
+/* Buttons fill the row, so a narrow panel stacks them full width instead of leaving a ragged wrap */
+.help-option .contact-actions > a {
+  flex: 1 1 auto;
+  justify-content: center;
+}
+
+.help-tip {
+  align-items: flex-start;
+  border-left: 3px solid var(--diamond-pink);
   color: rgba(255, 255, 255, 0.8);
-  margin: 0 0 20px;
+  display: flex;
+  font-size: 15px;
+  gap: 12px;
+  line-height: 1.5;
+  margin-top: 24px;
+  padding: 4px 0 4px 16px;
+}
+
+.help-tip svg {
+  color: var(--diamond-pink);
+  margin-top: 2px;
+}
+
+.help-tip p {
+  margin: 0;
+}
+
+.help-tip strong {
+  color: #ffffff;
 }
 
 .contact-actions {
@@ -488,6 +652,32 @@ body {
   overflow: hidden;
 }
 
+/* The title link stretches over the whole card; the buttons sit above it */
+.tool-card {
+  position: relative;
+}
+
+.tool-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.tool-link::after {
+  border-radius: inherit;
+  content: "";
+  inset: 0;
+  position: absolute;
+}
+
+.tool-link:focus-visible {
+  outline: none;
+}
+
+.tool-link:focus-visible::after {
+  outline: 2px solid var(--brand-pink);
+  outline-offset: -2px;
+}
+
 .tool-card-actions {
   align-self: end;
   display: flex;
@@ -495,6 +685,13 @@ body {
   grid-column: 2;
   grid-row: 3;
   justify-self: end;
+  pointer-events: none;
+  position: relative;
+  z-index: 1;
+}
+
+.tool-card-actions > * {
+  pointer-events: auto;
 }
 
 .tool-card-actions .btn-primary,
@@ -540,6 +737,278 @@ body {
 
 .btn-secondary.is-disabled:hover {
   background-color: transparent;
+}
+
+/* Tool detail pages */
+
+.hero-compact {
+  min-height: 0;
+}
+
+/* Header and body share one centred column so their left edges line up */
+.tool-page-inner {
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.hero .tool-header {
+  padding-top: clamp(24px, 5vh, 64px);
+  padding-bottom: clamp(32px, 6vh, 72px);
+  position: relative;
+  z-index: 1;
+}
+
+.breadcrumb {
+  color: rgba(255, 255, 255, 0.72);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 14px;
+  gap: 8px;
+  list-style: none;
+  margin: 0 0 24px;
+  padding: 0;
+}
+
+.breadcrumb li + li::before {
+  color: rgba(255, 255, 255, 0.4);
+  content: "/";
+  margin-right: 8px;
+}
+
+.breadcrumb a {
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  color: var(--diamond-pink);
+}
+
+.tool-title {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px 24px;
+}
+
+.tool-title-icon {
+  display: block;
+  flex: none;
+  height: 80px;
+  width: 80px;
+}
+
+.tool-title h1 {
+  font-size: clamp(30px, 3.6vw, 48px);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  margin: 0;
+}
+
+.tool-tagline {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 18px;
+  line-height: 1.4;
+  margin: 6px 0 0;
+}
+
+.tool-title .btn-primary {
+  margin-left: auto;
+}
+
+.tool-header .btn-primary.is-disabled {
+  background-color: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.tool-detail {
+  background-color: #f6f6f8;
+  color: var(--charcoal);
+  flex: 1 0 auto;
+  padding: clamp(32px, 5vh, 64px) 0 clamp(64px, 10vh, 120px);
+}
+
+.tool-detail-grid {
+  align-items: start;
+  display: grid;
+  gap: 24px;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+}
+
+.tool-main,
+.tool-side {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.tool-panel {
+  background-color: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 16px;
+  line-height: 1.6;
+  padding: 24px 28px;
+}
+
+.tool-panel h2 {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 0 0 12px;
+}
+
+.tool-panel p {
+  margin: 0;
+}
+
+.tool-panel ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.tool-panel li + li {
+  margin-top: 8px;
+}
+
+.tool-video {
+  align-items: center;
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(160deg, #151925 0%, #1e2335 45%, #2a1a2a 100%);
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.72);
+  display: flex;
+  flex-direction: column;
+  font-size: 15px;
+  gap: 16px;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.tool-video p {
+  margin: 0;
+}
+
+.tool-video video {
+  background-color: #000000;
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.tool-video-mark {
+  fill: var(--diamond-pink);
+  height: 40px;
+  width: 40px;
+}
+
+.tool-resources {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  list-style: none;
+  padding: 0;
+}
+
+.tool-panel .tool-resources {
+  padding-left: 0;
+}
+
+.tool-panel .tool-resources li + li {
+  margin-top: 0;
+}
+
+.tool-resources a {
+  align-items: center;
+  color: var(--charcoal);
+  display: inline-flex;
+  font-weight: 700;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.tool-resources a:hover {
+  color: var(--brand-pink);
+}
+
+.tool-resources svg {
+  fill: none;
+  flex: none;
+  height: 18px;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+  width: 18px;
+}
+
+.tool-resources a.is-disabled,
+.tool-resources a.is-disabled:hover {
+  color: rgba(27, 35, 41, 0.4);
+  cursor: not-allowed;
+}
+
+.tool-resources-note {
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.tool-credits {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  list-style: none;
+}
+
+.tool-panel .tool-credits {
+  padding-left: 0;
+}
+
+.tool-panel .tool-credits li + li {
+  margin-top: 0;
+}
+
+.tool-credits:empty {
+  display: none;
+}
+
+/* The placeholder line only shows while the list is empty */
+.tool-credits:not(:empty) + .tool-credits-empty {
+  display: none;
+}
+
+.tool-credits-empty {
+  color: var(--charcoal-muted);
+}
+
+.tool-credit {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+}
+
+.tool-credit img {
+  background-color: #2b3142;
+  border-radius: 50%;
+  flex: none;
+  height: 44px;
+  object-fit: cover;
+  object-position: top;
+  width: 44px;
+}
+
+.tool-panel .tool-credit-name {
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.tool-panel .tool-credit-role {
+  color: var(--charcoal-muted);
+  font-size: 14px;
+  line-height: 1.4;
+  margin-top: 2px;
 }
 
 /* Footer */
@@ -605,8 +1074,9 @@ footer a:hover {
     width: 100%;
   }
 
-  .team-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+  .help-grid,
+  .tool-detail-grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -655,7 +1125,20 @@ footer a:hover {
   }
 
   .team-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    --team-cols: 2;
+  }
+
+  .tool-title-icon {
+    height: 56px;
+    width: 56px;
+  }
+
+  .tool-title .btn-primary {
+    margin-left: 0;
+  }
+
+  .tool-panel {
+    padding: 20px;
   }
 
   .footer-inner {

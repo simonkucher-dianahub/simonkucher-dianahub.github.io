@@ -12,7 +12,7 @@
         // Swap missing team headshots for the default silhouette
         document.addEventListener("error", function (event) {
             var img = event.target;
-            if (img.tagName !== "IMG" || !img.closest(".team-card")) return;
+            if (img.tagName !== "IMG" || !img.closest(".team-member")) return;
             if (img.getAttribute("src") === "assets/headshots/default.svg") return;
             img.src = "assets/headshots/default.svg";
             img.alt = "";
@@ -56,77 +56,134 @@
 
                 <h1 class="team-heading">Meet our team</h1>
 
+                <h2 class="team-group-heading">Leadership</h2>
                 <div class="team-grid">
-
-                    <article class="team-card">
-                        <img src="assets/headshots/6130_Carlos_Zink_872_PowerPoint_CV.jpg" alt="Carlos Zink">
-                        <div class="team-card-body">
-                            <h2>Carlos Zink</h2>
+                    <article class="team-member">
+                        <img src="assets/headshots/guilherme_nami.png" alt="Guilherme Nami">
+                        <div class="team-member-info">
+                            <h3 class="team-name">Guilherme Nami</h3>
+                            <p class="team-position">Partner</p>
+                            <p class="team-location">AME – Santiago</p>
+                        </div>
+                    </article>
+                    <article class="team-member">
+                        <img src="assets/headshots/nicolas_bence.jpg" alt="Nicolas Bence">
+                        <div class="team-member-info">
+                            <h3 class="team-name">Nicolas Bence</h3>
+                            <p class="team-position">Partner</p>
+                            <p class="team-location">AME – Santiago</p>
+                        </div>
+                    </article>
+                    <article class="team-member">
+                        <img src="assets/headshots/carlos_sink.jpg" alt="Carlos Zink">
+                        <div class="team-member-info">
+                            <h3 class="team-name">Carlos Zink</h3>
                             <p class="team-position">Senior Director</p>
                             <p class="team-location">AME – São Paulo</p>
                         </div>
                     </article>
-
-                    <article class="team-card">
-                        <img src="assets/headshots/default.svg" alt="">
-                        <div class="team-card-body">
-                            <h2>Jorge Reyes Garcia</h2>
+                    <article class="team-member">
+                        <img src="assets/headshots/jorge_reyes.png" alt="Jorge Reyes Garcia">
+                        <div class="team-member-info">
+                            <h3 class="team-name">Jorge Reyes Garcia</h3>
                             <p class="team-position">Director</p>
                             <p class="team-location">AME – Mexico City</p>
                         </div>
                     </article>
+                </div>
 
-                    <article class="team-card">
-                        <img src="assets/headshots/10716_Pedro_Pires_Sulzer_1495_PowerPoint_CV.jpg"
-                            alt="Pedro Pires Sulzer">
-                        <div class="team-card-body">
-                            <h2>Pedro Pires Sulzer</h2>
-                            <p class="team-position">Senior Consultant</p>
-                            <p class="team-location">AME – São Paulo</p>
-                        </div>
-                    </article>
-
-                    <article class="team-card">
-                        <img src="assets/headshots/default.svg" alt="">
-                        <div class="team-card-body">
-                            <h2>David Cortina</h2>
-                            <p class="team-position">Consultant</p>
-                            <p class="team-location">AME – Mexico City</p>
-                        </div>
-                    </article>
-
-                    <article class="team-card">
-                        <img src="assets/headshots/default.svg" alt="">
-                        <div class="team-card-body">
-                            <h2>Sofia Moreno Lopez</h2>
-                            <p class="team-position">Software Consultant</p>
-                            <p class="team-location">AME – Mexico City</p>
-                        </div>
-                    </article>
-
-                    <article class="team-card">
-                        <img src="assets/headshots/default.svg" alt="">
-                        <div class="team-card-body">
-                            <h2>Nicolas Bdill</h2>
+                <h2 class="team-group-heading">Solutions team</h2>
+                <div class="team-grid">
+                    <article class="team-member">
+                        <img src="assets/headshots/nicolas_bdill.png" alt="Nicolas Bdill">
+                        <div class="team-member-info">
+                            <h3 class="team-name">Nicolas Bdill</h3>
                             <p class="team-position">Data Consultant</p>
                             <p class="team-location">AME – Mexico City</p>
                         </div>
                     </article>
+                    <article class="team-member">
+                        <img src="assets/headshots/sofia_moreno.jpg" alt="Sofia Moreno Lopez">
+                        <div class="team-member-info">
+                            <h3 class="team-name">Sofia Moreno Lopez</h3>
+                            <p class="team-position">Software Consultant</p>
+                            <p class="team-location">AME – Mexico City</p>
+                        </div>
+                    </article>
+                </div>
 
+                <h2 class="team-group-heading">Core team</h2>
+                <div class="team-grid">
+                    <article class="team-member">
+                        <img src="assets/headshots/igor_franchini.png" alt="Igor Franchini">
+                        <div class="team-member-info">
+                            <h3 class="team-name">Igor Franchini</h3>
+                            <p class="team-position">Senior Consultant</p>
+                            <p class="team-location">AME – São Paulo</p>
+                        </div>
+                    </article>
+                    <article class="team-member">
+                        <img src="assets/headshots/matheus_immer.png" alt="Matheus Immer">
+                        <div class="team-member-info">
+                            <h3 class="team-name">Matheus Immer</h3>
+                            <p class="team-position">Senior Consultant</p>
+                            <p class="team-location">AME – São Paulo</p>
+                        </div>
+                    </article>
+                    <article class="team-member">
+                        <img src="assets/headshots/pedro_pires.jpg" alt="Pedro Pires Sulzer">
+                        <div class="team-member-info">
+                            <h3 class="team-name">Pedro Pires Sulzer</h3>
+                            <p class="team-position">Senior Consultant</p>
+                            <p class="team-location">AME – São Paulo</p>
+                        </div>
+                    </article>
+                    <article class="team-member">
+                        <img src="assets/headshots/david_cortina.png" alt="David Cortina">
+                        <div class="team-member-info">
+                            <h3 class="team-name">David Cortina</h3>
+                            <p class="team-position">Consultant</p>
+                            <p class="team-location">AME – Mexico City</p>
+                        </div>
+                    </article>
+                    <article class="team-member">
+                        <img src="assets/headshots/lucas_domeyko.png" alt="Lucas Domeyko">
+                        <div class="team-member-info">
+                            <h3 class="team-name">Lucas Domeyko</h3>
+                            <p class="team-position">Consultant</p>
+                            <p class="team-location">AME – Santiago</p>
+                        </div>
+                    </article>
+                    <article class="team-member">
+                        <img src="assets/headshots/martin_palacios.png" alt="Martin Palacios">
+                        <div class="team-member-info">
+                            <h3 class="team-name">Martin Palacios</h3>
+                            <p class="team-position">Consultant</p>
+                            <p class="team-location">AME – Mexico City</p>
+                        </div>
+                    </article>
+                    <article class="team-member">
+                        <img src="assets/headshots/ricardo_gonzales.png" alt="Ricardo Gonzales">
+                        <div class="team-member-info">
+                            <h3 class="team-name">Ricardo Gonzales</h3>
+                            <p class="team-position">Consultant</p>
+                            <p class="team-location">AME – Mexico City</p>
+                        </div>
+                    </article>
                 </div>
             </article>
         </main>
     </div>
 
     <footer>
-      <div class="container footer-inner">
-        <nav class="footer-links">
-          <a href="index.html">Tools</a>
-          <a href="about.html">About Diana</a>
-          <a href="help.html">Need help?</a>
-        </nav>
-        <p class="footer-copyright">&copy; 2026 Simon-Kucher. All rights reserved.</p>
-      </div>
+        <div class="container footer-inner">
+            <nav class="footer-links">
+                <a href="index.html">Tools</a>
+                <a href="about.html">About Diana</a>
+                <a href="help.html">Need help?</a>
+            </nav>
+            <p class="footer-copyright">&copy; 2026 Simon-Kucher. All rights reserved.</p>
+        </div>
     </footer>
 </body>
 

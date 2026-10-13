@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="GitLab Pages">
+  <title>Compol · Dianahub</title>
+  <link rel="icon" href="../assets/www.simon-kucher.ico">
+  <link rel="stylesheet" href="../style.css">
+  <script>
+    // Swap missing credit headshots for the default silhouette
+    document.addEventListener("error", function (event) {
+      var img = event.target;
+      if (img.tagName !== "IMG" || !img.closest(".tool-credit")) return;
+      if (img.getAttribute("src") === "../assets/headshots/default.svg") return;
+      img.src = "../assets/headshots/default.svg";
+      img.alt = "";
+    }, true);
+  </script>
+</head>
+
+<body>
+  <div class="hero hero-compact">
+    <svg class="hero-diamonds" viewBox="0 0 1300 600" preserveAspectRatio="xMaxYMax meet" aria-hidden="true">
+      <path
+        d="M237.5 425L362.5 550L237.5 675L112.5 550Z M487.5 425L612.5 550L487.5 675L362.5 550Z M737.5 400L862.5 525L737.5 650L612.5 525Z M862.5 275L987.5 400L862.5 525L737.5 400Z M1112.5 275L1237.5 400L1112.5 525L987.5 400Z M987.5 150L1112.5 275L987.5 400L862.5 275Z M1237.5 400L1362.5 525L1237.5 650L1112.5 525Z" />
+    </svg>
+
+    <header class="navbar">
+      <div class="container navbar-inner">
+        <a class="navbar-brand" href="../index.html">
+          <img src="../assets/dianahub_logo.png" alt="DianaHub">
+        </a>
+
+        <nav class="navbar-links">
+          <a href="../index.html" aria-current="page">Tools</a>
+          <a href="../about.html">About Diana</a>
+          <a class="navbar-cta" href="../help.html">Need help?</a>
+        </nav>
+      </div>
+    </header>
+
+    <div class="container tool-header">
+      <div class="tool-page-inner">
+        <nav aria-label="Breadcrumb">
+          <ol class="breadcrumb">
+            <li><a href="../index.html">Tools</a></li>
+            <li aria-current="page">Compol</li>
+          </ol>
+        </nav>
+
+        <div class="tool-title">
+          <img class="tool-title-icon" src="../assets/icons/compol.svg" alt="">
+          <div>
+            <h1>Compol</h1>
+            <p class="tool-tagline">Coming to you next</p>
+          </div>
+          <a class="btn-primary is-disabled" aria-disabled="true">
+            Download Installer
+            <svg viewBox="0 0 20 20" aria-hidden="true">
+              <path d="M10 3v10M5.5 8.5L10 13l4.5-4.5M4 17h12" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="tool-detail">
+    <div class="container">
+      <div class="tool-page-inner tool-detail-grid">
+        <div class="tool-main">
+          <!-- To add the demo, replace the placeholder inside with:
+               <video controls preload="metadata" src="..."></video> -->
+          <div class="tool-video" id="demo-video">
+            <svg class="tool-video-mark" viewBox="0 0 40 40" aria-hidden="true">
+              <path fill-rule="evenodd" d="M20 2a18 18 0 1 1 0 36a18 18 0 1 1 0-36z M20 5a15 15 0 1 0 0 30a15 15 0 1 0 0-30z M16 13l12 7-12 7z" />
+            </svg>
+            <p>Demo video coming soon</p>
+          </div>
+
+          <section class="tool-panel">
+            <h2>Description</h2>
+            <p>Compol is in development. Details will be shared here when it launches.</p>
+          </section>
+        </div>
+
+        <aside class="tool-side">
+          <section class="tool-panel">
+            <h2>Resources</h2>
+            <ul class="tool-resources">
+              <li>
+                <a class="is-disabled" aria-disabled="true">
+                  <svg viewBox="0 0 20 20" aria-hidden="true">
+                    <path d="M5 2.5h6.5L15 6v11.5H5z M11.5 2.5V6H15 M7.5 10h5M7.5 13h5" />
+                  </svg>
+                  Tutorial
+                  <span class="tool-resources-note">Coming soon</span>
+                </a>
+              </li>
+              <li>
+                <a href="#demo-video">
+                  <svg viewBox="0 0 20 20" aria-hidden="true">
+                    <path d="M6 4l10 6-10 6z" />
+                  </svg>
+                  Demo video
+                </a>
+              </li>
+            </ul>
+          </section>
+          <section class="tool-panel">
+            <h2>Credits</h2>
+            <!-- Add one <li> per person:
+                 <li class="tool-credit">
+                   <img src="../assets/headshots/first_last.png" alt="">
+                   <div>
+                     <p class="tool-credit-name">First Last</p>
+                     <p class="tool-credit-role">Role on this tool</p>
+                   </div>
+                 </li> -->
+            <ul class="tool-credits">
+              <li class="tool-credit">
+                <img src="../assets/headshots/carlos_sink.jpg" alt="">
+                <div>
+                  <p class="tool-credit-name">Carlos Zink</p>
+                  <p class="tool-credit-role">Senior Director · São Paulo</p>
+                </div>
+              </li>
+              <li class="tool-credit">
+                <img src="../assets/headshots/jorge_reyes.png" alt="">
+                <div>
+                  <p class="tool-credit-name">Jorge Reyes Garcia</p>
+                  <p class="tool-credit-role">Director · Mexico City</p>
+                </div>
+              </li>
+              <li class="tool-credit">
+                <img src="../assets/headshots/clemente_arnolds.png" alt="">
+                <div>
+                  <p class="tool-credit-name">Clemente Arnolds</p>
+                  <p class="tool-credit-role">Senior Manager · Santiago</p>
+                </div>
+              </li>
+              <li class="tool-credit">
+                <img src="../assets/headshots/eduardo_flores.png" alt="">
+                <div>
+                  <p class="tool-credit-name">Eduardo Flores</p>
+                  <p class="tool-credit-role">Manager · Mexico City</p>
+                </div>
+              </li>
+              <li class="tool-credit">
+                <img src="../assets/headshots/sofia_moreno.jpg" alt="">
+                <div>
+                  <p class="tool-credit-name">Sofia Moreno Lopez</p>
+                  <p class="tool-credit-role">Software Consultant · Mexico City</p>
+                </div>
+              </li>
+            </ul>
+            <p class="tool-credits-empty">Credits coming soon.</p>
+          </section>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <nav class="footer-links">
+        <a href="../index.html">Tools</a>
+        <a href="../about.html">About Diana</a>
+        <a href="../help.html">Need help?</a>
+      </nav>
+      <p class="footer-copyright">&copy; 2026 Simon-Kucher. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+
+</html>

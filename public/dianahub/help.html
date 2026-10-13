@@ -8,6 +8,47 @@
   <title>Need help? · Dianahub</title>
   <link rel="icon" href="assets/www.simon-kucher.ico">
   <link rel="stylesheet" href="style.css">
+  <script>
+    // "Send an email" copies the address instead of opening the mail app.
+    // navigator.clipboard needs https or localhost, so fall back to execCommand on the intranet host.
+    function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        return navigator.clipboard.writeText(text);
+      }
+      var field = document.createElement("textarea");
+      field.value = text;
+      field.setAttribute("readonly", "");
+      field.style.position = "fixed";
+      field.style.opacity = "0";
+      document.body.appendChild(field);
+      field.select();
+      var copied = document.execCommand("copy");
+      document.body.removeChild(field);
+      return copied ? Promise.resolve() : Promise.reject();
+    }
+
+    document.addEventListener("click", function (event) {
+      var link = event.target.closest('.help-option a[href^="mailto:"]');
+      if (!link) return;
+      event.preventDefault();
+
+      var address = decodeURIComponent(link.getAttribute("href").slice(7).split("?")[0]);
+      var label = link.querySelector(".btn-label");
+      copyText(address).then(function () {
+        if (!link.dataset.label) link.dataset.label = label.textContent;
+        label.textContent = "Email copied!";
+        link.classList.add("is-copied");
+        clearTimeout(link.copyTimer);
+        link.copyTimer = setTimeout(function () {
+          label.textContent = link.dataset.label;
+          link.classList.remove("is-copied");
+        }, 2000);
+      }, function () {
+        // Copying is blocked: open the mail app as before
+        window.location.href = link.href;
+      });
+    });
+  </script>
 </head>
 
 <body>
@@ -32,42 +73,81 @@
     </header>
 
     <main class="container hero-content">
-      <article class="content-card">
+      <article class="content-card help-card">
         <h1>Contact us</h1>
 
-        <section class="contact-block">
-          <h2>Issues with our tools?</h2>
-          <p>Reach out to Sofia Moreno on Teams or by email.</p>
-          <div class="contact-actions">
-            <a class="btn-primary" href="https://teams.microsoft.com/l/chat/0/0?users=sofia.moreno@simon-kucher.com" target="_blank" rel="noopener">
+        <div class="help-grid">
+          <section class="help-option">
+            <p class="help-topic">
               <svg viewBox="0 0 20 20" aria-hidden="true">
-                <path d="M4 3.5h12a1.5 1.5 0 0 1 1.5 1.5v8a1.5 1.5 0 0 1-1.5 1.5H9l-4.5 3v-3H4A1.5 1.5 0 0 1 2.5 13V5A1.5 1.5 0 0 1 4 3.5z" />
+                <path d="M12.5 3.5a4 4 0 0 0-4.9 5.1L3.5 12.7a1.4 1.4 0 0 0 2 2l4.1-4.1a4 4 0 0 0 5.1-4.9l-2.3 2.3-2-.4-.4-2z" />
               </svg>
-              Message on Teams
-            </a>
-            <a class="btn-outline-light" href="mailto:sofia.moreno@simon-kucher.com?subject=DianaHub%20-%20Tool%20issue">
-              <svg viewBox="0 0 20 20" aria-hidden="true">
-                <rect x="2.5" y="4.5" width="15" height="11" rx="1.5" />
-                <path d="M3 5.5l7 5.5 7-5.5" />
-              </svg>
-              Send an email
-            </a>
-          </div>
-        </section>
+              Tool support
+            </p>
+            <h2>Issues with our tools?</h2>
 
-        <section class="contact-block">
-          <h2>Business questions, ideas or requests?</h2>
-          <p>Reach out to Jorge Reyes by email.</p>
-          <div class="contact-actions">
-            <a class="btn-primary" href="mailto:jorge.reyes@simon-kucher.com?subject=DianaHub%20-%20Question">
+            <div class="help-person">
+              <img src="assets/headshots/sofia_moreno.jpg" alt="">
+              <div>
+                <p class="help-person-name">Sofia Moreno</p>
+                <p class="help-person-role">Software Consultant · Mexico City</p>
+              </div>
+            </div>
+
+            <div class="contact-actions">
+              <a class="btn-primary" href="https://teams.microsoft.com/l/chat/0/0?users=sofia.moreno@simon-kucher.com" target="_blank" rel="noopener">
+                <svg viewBox="0 0 20 20" aria-hidden="true">
+                  <path d="M4 3.5h12a1.5 1.5 0 0 1 1.5 1.5v8a1.5 1.5 0 0 1-1.5 1.5H9l-4.5 3v-3H4A1.5 1.5 0 0 1 2.5 13V5A1.5 1.5 0 0 1 4 3.5z" />
+                </svg>
+                Message on Teams
+              </a>
+              <a class="btn-outline-light" title="Copy sofia.moreno@simon-kucher.com" href="mailto:sofia.moreno@simon-kucher.com?subject=DianaHub%20-%20Tool%20issue">
+                <svg viewBox="0 0 20 20" aria-hidden="true">
+                  <rect x="2.5" y="4.5" width="15" height="11" rx="1.5" />
+                  <path d="M3 5.5l7 5.5 7-5.5" />
+                </svg>
+                <span class="btn-label" aria-live="polite">Send an email</span>
+              </a>
+            </div>
+          </section>
+
+          <section class="help-option">
+            <p class="help-topic">
               <svg viewBox="0 0 20 20" aria-hidden="true">
-                <rect x="2.5" y="4.5" width="15" height="11" rx="1.5" />
-                <path d="M3 5.5l7 5.5 7-5.5" />
+                <path d="M10 2.5a5 5 0 0 0-3 9v2h6v-2a5 5 0 0 0-3-9z M7.5 16h5 M8.5 18h3" />
               </svg>
-              Send an email
-            </a>
-          </div>
-        </section>
+              Business Support
+            </p>
+            <h2>Questions, ideas or requests?</h2>
+
+            <div class="help-person">
+              <img src="assets/headshots/jorge_reyes.png" alt="">
+              <div>
+                <p class="help-person-name">Jorge Reyes</p>
+                <p class="help-person-role">Director · Mexico City</p>
+              </div>
+            </div>
+
+            <div class="contact-actions">
+              <a class="btn-primary" title="Copy jorge.reyes@simon-kucher.com" href="mailto:jorge.reyes@simon-kucher.com?subject=DianaHub%20-%20Question">
+                <svg viewBox="0 0 20 20" aria-hidden="true">
+                  <rect x="2.5" y="4.5" width="15" height="11" rx="1.5" />
+                  <path d="M3 5.5l7 5.5 7-5.5" />
+                </svg>
+                <span class="btn-label" aria-live="polite">Send an email</span>
+              </a>
+            </div>
+          </section>
+        </div>
+
+        <aside class="help-tip">
+          <svg viewBox="0 0 20 20" aria-hidden="true">
+            <circle cx="10" cy="10" r="7.5" />
+            <path d="M10 9v4.5 M10 6.5v.01" />
+          </svg>
+          <p><strong>Reporting a bug?</strong> Include the tool name, what you were trying to do and a screenshot of
+            any error message. It helps us fix things much faster.</p>
+        </aside>
       </article>
     </main>
   </div>
