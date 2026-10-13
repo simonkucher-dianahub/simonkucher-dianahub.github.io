@@ -21,7 +21,7 @@
 </head>
 
 <body>
-    <div class="hero hero-page">
+    <div class="hero hero-compact">
         <svg class="hero-diamonds" viewBox="0 0 1300 600" preserveAspectRatio="xMaxYMax meet" aria-hidden="true">
             <path
                 d="M237.5 425L362.5 550L237.5 675L112.5 550Z M487.5 425L612.5 550L487.5 675L362.5 550Z M737.5 400L862.5 525L737.5 650L612.5 525Z M862.5 275L987.5 400L862.5 525L737.5 400Z M1112.5 275L1237.5 400L1112.5 525L987.5 400Z M987.5 150L1112.5 275L987.5 400L862.5 275Z M1237.5 400L1362.5 525L1237.5 650L1112.5 525Z" />
@@ -41,10 +41,16 @@
             </div>
         </header>
 
-        <main class="container hero-content">
-            <article class="content-card">
+        <div class="container page-header">
+            <div class="page-inner">
                 <h1>Hello from Diana!</h1>
+            </div>
+        </div>
+    </div>
 
+    <main class="page-body">
+        <div class="container">
+            <div class="page-inner">
                 <p>We're a team of tech-minded consultants based in Latin America. Our goal is to make analysis faster,
                     smarter, and deeper. Through our project work, we've built tools and methods that uncover sharper
                     insights and automate tasks that aren't easily done in Excel. We're sharing them with the whole
@@ -54,7 +60,7 @@
                 <p>Our name stands for Digital Analytics, and it's also a nod to La Diana Cazadora, the iconic Huntress
                     statue in Mexico City, who's been taking aim since 1942.</p>
 
-                <h1 class="team-heading">Meet our team</h1>
+                <h2 class="team-heading">Meet our team</h2>
 
                 <h2 class="team-group-heading">Leadership</h2>
                 <div class="team-grid">
@@ -95,7 +101,7 @@
                 <h2 class="team-group-heading">Solutions team</h2>
                 <div class="team-grid">
                     <article class="team-member">
-                        <img src="assets/headshots/nicolas_bdill.png" alt="Nicolas Bdill">
+                        <img src="assets/headshots/nicolas_bdill.jpg" alt="Nicolas Bdill">
                         <div class="team-member-info">
                             <h3 class="team-name">Nicolas Bdill</h3>
                             <p class="team-position">Data Consultant</p>
@@ -171,18 +177,29 @@
                         </div>
                     </article>
                 </div>
-            </article>
-        </main>
-    </div>
+            </div>
+        </div>
+    </main>
 
     <footer>
-        <div class="container footer-inner">
-            <nav class="footer-links">
-                <a href="index.html">Tools</a>
-                <a href="about.html">About Diana</a>
-                <a href="help.html">Need help?</a>
-            </nav>
-            <p class="footer-copyright">&copy; 2026 Simon-Kucher. All rights reserved.</p>
+        <div class="container">
+            <div class="footer-inner">
+                <div class="footer-top">
+                    <nav class="footer-links" aria-label="Footer">
+                        <a href="index.html">Tools</a>
+                        <a href="about.html">About Diana</a>
+                        <a href="help.html">Need help?</a>
+                    </nav>
+
+                    <a class="footer-brand" href="index.html">
+                        <img src="assets/dianahub_logo.png" alt="DianaHub">
+                    </a>
+                </div>
+
+                <div class="footer-bottom">
+                    <p>&copy; 2026 Simon-Kucher. All rights reserved.</p>
+                </div>
+            </div>
         </div>
     </footer>
 </body>
