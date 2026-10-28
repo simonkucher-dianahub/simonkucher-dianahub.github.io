@@ -50,7 +50,7 @@ body {
   background:
     radial-gradient(ellipse 75% 65% at 55% 22%, rgba(70, 115, 165, 0.5) 0%, rgba(70, 115, 165, 0.32) 25%, rgba(70, 115, 165, 0.14) 50%, rgba(70, 115, 165, 0.04) 75%, rgba(70, 115, 165, 0) 100%),
     radial-gradient(ellipse 80% 70% at 50% 55%, rgba(135, 105, 165, 0.55) 0%, rgba(135, 105, 165, 0.35) 25%, rgba(135, 105, 165, 0.15) 50%, rgba(135, 105, 165, 0.04) 75%, rgba(135, 105, 165, 0) 100%),
-    radial-gradient(ellipse 95% 80% at 55% 100%, rgba(150, 50, 95, 0.6) 0%, rgba(150, 50, 95, 0.38) 25%, rgba(150, 50, 95, 0.16) 50%, rgba(150, 50, 95, 0.05) 75%, rgba(150, 50, 95, 0) 100%),
+    radial-gradient(ellipse 95% 80% at 55% 100%, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.19) 25%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.025) 75%, rgba(255, 255, 255, 0) 100%),
     linear-gradient(160deg, #151925 0%, #1e2335 45%, #2a1a2a 100%);
   display: flex;
   flex: 0 0 auto;
@@ -869,8 +869,9 @@ body {
   margin: 0;
 }
 
-.tool-video video {
+.tool-video iframe {
   background-color: #000000;
+  border: 0;
   display: block;
   height: 100%;
   width: 100%;
@@ -993,7 +994,7 @@ body {
 
 footer {
   background:
-    radial-gradient(ellipse 45% 110% at 50% 45%, rgba(150, 85, 150, 0.6) 0%, rgba(150, 85, 150, 0.3) 40%, rgba(150, 85, 150, 0) 75%),
+    radial-gradient(ellipse 45% 110% at 50% 45%, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.15) 40%, rgba(255, 255, 255, 0) 75%),
     radial-gradient(ellipse 35% 70% at 30% 100%, rgba(70, 105, 165, 0.35) 0%, rgba(70, 105, 165, 0) 70%),
     linear-gradient(90deg, #17141c 0%, #2a1a2c 50%, #17141c 100%);
   color: #ffffff;
