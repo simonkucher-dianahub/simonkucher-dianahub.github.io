@@ -1,9 +1,9 @@
-# Deploys the public/ folder to GitHub Pages on every push to master
+# Deploys the public/ folder to GitHub Pages on every push to main
 name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [master]
+    branches: [main]
   workflow_dispatch:
 
 permissions:

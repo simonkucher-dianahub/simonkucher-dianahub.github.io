@@ -1,8 +1,10 @@
-
 name: Mirror to GitLab
 
 on:
   push:
+    branches: ['**']
+    tags: ['**']
+  delete:
   workflow_dispatch:
 
 permissions:
@@ -12,21 +14,38 @@ concurrency:
   group: gitlab-mirror
   cancel-in-progress: false
 
+env:
+  GITLAB_REPO: gitlab.com/latam-python-club-committee/dianahub.git
+
 jobs:
   mirror:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Check out full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
       - name: Mirror GitHub to GitLab
         env:
-          GH_TOKEN: ${{ github.token }}
           GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
         run: |
-          git clone --bare \
-            "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" \
-            repo.git
+          if [ -z "$GITLAB_TOKEN" ]; then
+            echo "::error::GITLAB_TOKEN secret is not set (Settings > Secrets and variables > Actions)"
+            exit 1
+          fi
 
-          cd repo.git
+          url="https://oauth2:${GITLAB_TOKEN}@${GITLAB_REPO}"
 
-          git push --mirror \
-            "https://oauth2:${GITLAB_TOKEN}@gitlab.com/latam-python-club-committee/dianahub.git"
+          if ! git ls-remote "$url" > /dev/null; then
+            echo "::error::Cannot access https://${GITLAB_REPO}. Check the project path and that the token has write_repository scope and Maintainer role."
+            exit 1
+          fi
+
+          # Turn every remote-tracking branch into a local ref, then push
+          # only branches and tags (refs/pull/* etc. are rejected by GitLab).
+          git fetch --prune --tags origin '+refs/heads/*:refs/heads/*' --update-head-ok
+          git push --force --prune "$url" \
+            'refs/heads/*:refs/heads/*' \
+            'refs/tags/*:refs/tags/*'
