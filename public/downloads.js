@@ -1,7 +1,7 @@
 // Installer download links, keyed by tool. This is the only place to change them.
 // Leave a link empty ("") to show that tool's Download Installer button as disabled.
 var DOWNLOADS = {
-  factorstrat: "https://simonkuchernam-my.sharepoint.com/:u:/g/personal/sofia_moreno_simon-kucher_com/IQBTM3eLuNOiRI6qNL96Y8G4ATJh0oI7aCme97DEARcXlX0?e=lgfigL&download=1",
+  factorstrat: "https://simonkuchernam-my.sharepoint.com/:u:/g/personal/sofia_moreno_simon-kucher_com/IQDMJLlr9MRVSKm5h5Ok9LLkAfHkgsgtHatnsY-LkGlI-aE?e=rWrXab",
   quickwins: "",
   compol: ""
 };
