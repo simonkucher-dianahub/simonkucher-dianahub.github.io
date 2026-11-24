@@ -2,7 +2,7 @@
 // Leave a link empty ("") to show that tool's Download Installer button as disabled.
 var DOWNLOADS = {
   factorstrat: "https://simonkuchernam-my.sharepoint.com/:u:/g/personal/sofia_moreno_simon-kucher_com/IQDGnqqg2-MpTZBS3wYK0-q1AQE7HAafFaA4gBAkBreO4Kc?e=hO1ZpG&download=1",
-  quickwins: "https://simonkuchernam-my.sharepoint.com/:u:/g/personal/sofia_moreno_simon-kucher_com/IQC7jVnLOrU9R7ENEAnHYEfEAffKEbFUttTEEKF04m2sb-c?e=NQLTnF&download=1",
+  quickwins: "https://simonkuchernam-my.sharepoint.com/:u:/g/personal/sofia_moreno_simon-kucher_com/IQAN4IdxeTjnRLlB3J-ohyfaAcykLu6mxJXcEd35IdvjcVo?e=qn1cYE=1",
   compol: ""
 };
 
