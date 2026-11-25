@@ -44,14 +44,14 @@ body {
   width: 100%;
 }
 
-/* Hero: full-height dark gradient with navbar laid over it */
+/* Hero: full-height dark blue gradient with navbar laid over it */
 
 .hero {
   background:
     radial-gradient(ellipse 75% 65% at 55% 22%, rgba(70, 115, 165, 0.5) 0%, rgba(70, 115, 165, 0.32) 25%, rgba(70, 115, 165, 0.14) 50%, rgba(70, 115, 165, 0.04) 75%, rgba(70, 115, 165, 0) 100%),
-    radial-gradient(ellipse 80% 70% at 50% 55%, rgba(135, 105, 165, 0.55) 0%, rgba(135, 105, 165, 0.35) 25%, rgba(135, 105, 165, 0.15) 50%, rgba(135, 105, 165, 0.04) 75%, rgba(135, 105, 165, 0) 100%),
+    radial-gradient(ellipse 80% 70% at 50% 55%, rgba(85, 135, 195, 0.55) 0%, rgba(85, 135, 195, 0.35) 25%, rgba(85, 135, 195, 0.15) 50%, rgba(85, 135, 195, 0.04) 75%, rgba(85, 135, 195, 0) 100%),
     radial-gradient(ellipse 95% 80% at 55% 100%, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.19) 25%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.025) 75%, rgba(255, 255, 255, 0) 100%),
-    linear-gradient(160deg, #151925 0%, #1e2335 45%, #2a1a2a 100%);
+    linear-gradient(160deg, #151925 0%, #1e2335 45%, #172840 100%);
   display: flex;
   flex: 0 0 auto;
   flex-direction: column;
@@ -134,8 +134,74 @@ body {
   color: var(--night);
 }
 
-.navbar-links a[aria-current="page"]:not(.navbar-cta) {
+.navbar-links a {
+  transition: box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.navbar-links a[aria-current]:not(.navbar-cta) {
   box-shadow: inset 0 -2px 0 var(--diamond-pink);
+}
+
+.navbar-links .navbar-cta[aria-current="location"] {
+  background-color: #ffffff;
+  color: var(--night);
+}
+
+/* Single-scroll home page: sections jump-linked from the navbar */
+
+html {
+  scroll-padding-top: var(--nav-stuck-h, 72px);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* The sticky navbar takes no height, so it floats over the first hero and nothing
+   below it moves when it shrinks on scroll */
+.site-nav {
+  height: 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.site-nav-bar {
+  background-color: rgba(21, 25, 37, 0);
+  transition: background-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.site-nav .navbar-inner,
+.site-nav .navbar-brand img {
+  transition: padding 0.25s ease, height 0.25s ease;
+}
+
+.site-nav.is-stuck .site-nav-bar {
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  background-color: rgba(21, 25, 37, 0.9);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.site-nav.is-stuck .navbar-inner {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.site-nav.is-stuck .navbar-brand img {
+  height: 36px;
+}
+
+.site-nav.no-transition *,
+.site-nav.no-transition {
+  transition: none !important;
+}
+
+/* Room for the full-size navbar floating over the top of the first hero */
+.hero-home {
+  padding-top: var(--nav-h, 104px);
 }
 
 /* Hero content */
@@ -179,6 +245,19 @@ body {
   background-color: var(--brand-red);
 }
 
+/* Hero "Learn more": white outline, matching the navbar's "Need help?" button */
+.hero-content .btn-primary {
+  background-color: transparent;
+  border: 1px solid #ffffff;
+  padding: 11px 15px; /* 1px less than .btn-primary to make room for the border */
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.hero-content .btn-primary:hover {
+  background-color: #ffffff;
+  color: var(--night);
+}
+
 .btn-primary svg,
 .btn-secondary svg {
   fill: none;
@@ -190,7 +269,21 @@ body {
   width: 18px;
 }
 
-/* Inner pages (About, Help): compact hero with the page title, white body below */
+/* Section title at the top of the About and Help sections on the home page */
+.section-heading {
+  font-size: clamp(30px, 3.6vw, 48px);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  margin: 0 0 clamp(24px, 4vh, 48px);
+}
+
+/* Tinted background that sets the About section apart from the white sections around it */
+.page-body.section-alt {
+  background-color: #c9daf0;
+}
+
+/* Tool detail pages: compact hero with the page title, white body below */
 
 /* Header and body share one centred column so their left edges line up */
 .page-inner {
@@ -222,9 +315,100 @@ body {
   padding: clamp(32px, 6vh, 72px) 0 clamp(64px, 12vh, 160px);
 }
 
+/* Faint dark outline diamonds on the white body, on the hero's grid and line style
+   but in their own shapes: a zigzag on the left edge beside the Solutions team row,
+   then a pyramid at the bottom right that the footer cuts in half. Both sit where
+   only (opaque) cards are, so no lines cross the text. */
+
+.page-body-diamonds {
+  overflow: hidden;
+  position: relative;
+}
+
+.page-body-diamonds > .container {
+  position: relative;
+  z-index: 1;
+}
+
+.page-body-diamonds::before,
+.page-body-diamonds::after {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  content: "";
+  pointer-events: none;
+  position: absolute;
+}
+
+.page-body-diamonds::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 625'%3E%3Cpath fill='none' stroke='rgb(23,40,64)' stroke-opacity='0.3' stroke-width='1' vector-effect='non-scaling-stroke' d='M0 0L125 125L0 250L-125 125Z M125 125L250 250L125 375L0 250Z M0 250L125 375L0 500L-125 375Z M125 375L250 500L125 625L0 500Z M250 250L375 375L250 500L125 375Z M375 375L500 500L375 625L250 500Z'/%3E%3C/svg%3E");
+  height: 312px;
+  left: 0;
+  top: 46%;
+  width: 250px;
+}
+
+.page-body-diamonds::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='425 0 875 500'%3E%3Cpath fill='none' stroke='rgb(23,40,64)' stroke-opacity='0.3' stroke-width='1' vector-effect='non-scaling-stroke' d='M550 375L675 500L550 625L425 500Z M800 375L925 500L800 625L675 500Z M1050 375L1175 500L1050 625L925 500Z M1300 375L1425 500L1300 625L1175 500Z M675 250L800 375L675 500L550 375Z M925 250L1050 375L925 500L800 375Z M1175 250L1300 375L1175 500L1050 375Z M800 125L925 250L800 375L675 250Z M1050 125L1175 250L1050 375L925 250Z M925 0L1050 125L925 250L800 125Z'/%3E%3C/svg%3E");
+  bottom: 0;
+  height: 250px;
+  right: 0;
+  width: 437px;
+}
+
+@media (max-width: 900px) {
+  .page-body-diamonds::before {
+    display: none;
+  }
+}
+
 .page-body > .container > .page-inner > p {
   margin: 0 0 1em;
   max-width: 820px;
+}
+
+/* About page intro: text beside the Diana photo, stacked on narrow screens */
+
+.about-intro {
+  align-items: center;
+  display: grid;
+  gap: 48px;
+  grid-template-columns: 1fr 1.25fr;
+}
+
+.about-intro-text p {
+  margin: 0 0 1em;
+}
+
+.about-intro-text p:last-child {
+  margin-bottom: 0;
+}
+
+/* The photo takes the wider column at its own 3:2 shape, so it is larger than the text block */
+.about-intro-photo {
+  margin: 0;
+}
+
+.about-intro-photo img {
+  aspect-ratio: 3 / 2;
+  display: block;
+  height: auto;
+  object-fit: cover;
+  object-position: 50% 30%; /* keep the statue in frame when trimming */
+  width: 100%;
+}
+
+.about-intro-photo figcaption {
+  color: #4b5563;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+@media (max-width: 900px) {
+  .about-intro {
+    gap: 24px;
+    grid-template-columns: 1fr;
+  }
 }
 
 /* About page team */
@@ -283,7 +467,7 @@ body {
 /* Photo cards, shared by every group; partial rows stay centered */
 
 .team-grid {
-  --team-cols: 4;
+  --team-cols: 5;
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
@@ -295,7 +479,7 @@ body {
 }
 
 .team-member {
-  background: linear-gradient(160deg, #151925 0%, #1e2335 45%, #2a1a2a 100%);
+  background: linear-gradient(160deg, #151925 0%, #1e2335 45%, #172840 100%);
   border-radius: 10px;
   color: var(--ink);
   overflow: hidden;
@@ -493,10 +677,24 @@ body {
   padding: clamp(24px, 4vh, 96px) 0 clamp(112px, 18vh, 240px);
 }
 
-/* Search bar and cards share one centred column so their left edges line up */
+/* Search bar and cards share one centred column so their left edges line up.
+   The column is exactly as wide as the cards that fit (3, 2 or 1), so the row stays centred.
+   Breakpoints = column width + the container's side padding (64px each side above 900px). */
 .tools-inner {
   margin: 0 auto;
-  max-width: calc(440px * 2 + 20px);
+  max-width: calc(400px * 3 + 20px * 2);
+}
+
+@media (max-width: 1367px) {
+  .tools-inner {
+    max-width: calc(400px * 2 + 20px);
+  }
+}
+
+@media (max-width: 947px) {
+  .tools-inner {
+    max-width: 400px;
+  }
 }
 
 .tools-search {
@@ -571,7 +769,7 @@ body {
 .tools-grid {
   display: grid;
   gap: 20px;
-  grid-template-columns: repeat(auto-fit, minmax(0, 440px));
+  grid-template-columns: repeat(auto-fit, minmax(0, 400px));
 }
 
 /* Store-style app tiles */
@@ -585,7 +783,7 @@ body {
   display: grid;
   grid-template-columns: 108px 1fr;
   grid-template-rows: min-content min-content 1fr;
-  height: 162px;
+  height: calc(108px + 40px); /* icon height + padding: buttons line up with the icon's bottom edge */
   overflow: hidden;
   padding: 20px;
   position: relative;
@@ -676,6 +874,7 @@ body {
 .tool-card-actions .btn-secondary {
   font-size: 14px;
   padding: 8px 14px;
+  white-space: nowrap;
 }
 
 .tool-card-actions .btn-secondary {
@@ -854,7 +1053,7 @@ body {
 .tool-video {
   align-items: center;
   aspect-ratio: 16 / 9;
-  background: linear-gradient(160deg, #151925 0%, #1e2335 45%, #2a1a2a 100%);
+  background: linear-gradient(160deg, #151925 0%, #1e2335 45%, #172840 100%);
   border-radius: 8px;
   color: rgba(255, 255, 255, 0.72);
   display: flex;
@@ -990,13 +1189,13 @@ body {
   margin-top: 2px;
 }
 
-/* Footer: dark gradient band with a purple glow, echoing the hero */
+/* Footer: dark blue gradient band with a blue glow, echoing the hero */
 
 footer {
   background:
     radial-gradient(ellipse 45% 110% at 50% 45%, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.15) 40%, rgba(255, 255, 255, 0) 75%),
     radial-gradient(ellipse 35% 70% at 30% 100%, rgba(70, 105, 165, 0.35) 0%, rgba(70, 105, 165, 0) 70%),
-    linear-gradient(90deg, #17141c 0%, #2a1a2c 50%, #17141c 100%);
+    linear-gradient(90deg, #131822 0%, #1a2a42 50%, #131822 100%);
   color: #ffffff;
   font-size: 14px;
   line-height: 1.5;
@@ -1093,8 +1292,14 @@ footer p {
     order: 0;
   }
 
-  .navbar-brand img {
+  .navbar-brand img,
+  .site-nav.is-stuck .navbar-brand img {
     height: 28px;
+  }
+
+  .site-nav.is-stuck .navbar-inner {
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
 
   .navbar-links {

@@ -8,103 +8,382 @@
   <link rel="icon" href="assets/www.simon-kucher.ico">
   <link rel="stylesheet" href="style.css">
   <script src="downloads.js"></script>
+  <script>
+    // Swap missing team headshots for the default silhouette
+    document.addEventListener("error", function (event) {
+      var img = event.target;
+      if (img.tagName !== "IMG" || !img.closest(".team-member")) return;
+      if (img.getAttribute("src") === "assets/headshots/default.svg") return;
+      img.src = "assets/headshots/default.svg";
+      img.alt = "";
+    }, true);
+
+    // "Send an email" copies the address instead of opening the mail app.
+    // navigator.clipboard needs https or localhost, so fall back to execCommand on the intranet host.
+    function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        return navigator.clipboard.writeText(text);
+      }
+      var field = document.createElement("textarea");
+      field.value = text;
+      field.setAttribute("readonly", "");
+      field.style.position = "fixed";
+      field.style.opacity = "0";
+      document.body.appendChild(field);
+      field.select();
+      var copied = document.execCommand("copy");
+      document.body.removeChild(field);
+      return copied ? Promise.resolve() : Promise.reject();
+    }
+
+    document.addEventListener("click", function (event) {
+      var link = event.target.closest('.help-option a[href^="mailto:"]');
+      if (!link) return;
+      event.preventDefault();
+
+      var address = decodeURIComponent(link.getAttribute("href").slice(7).split("?")[0]);
+      var label = link.querySelector(".btn-label");
+      copyText(address).then(function () {
+        if (!link.dataset.label) link.dataset.label = label.textContent;
+        label.textContent = "Email copied!";
+        link.classList.add("is-copied");
+        clearTimeout(link.copyTimer);
+        link.copyTimer = setTimeout(function () {
+          label.textContent = link.dataset.label;
+          link.classList.remove("is-copied");
+        }, 2000);
+      }, function () {
+        // Copying is blocked: open the mail app as before
+        window.location.href = link.href;
+      });
+    });
+  </script>
 </head>
 
 <body>
-  <div class="hero">
-    <svg class="hero-diamonds" viewBox="0 0 1300 600" preserveAspectRatio="xMaxYMax meet" aria-hidden="true">
-      <path
-        d="M237.5 425L362.5 550L237.5 675L112.5 550Z M487.5 425L612.5 550L487.5 675L362.5 550Z M737.5 400L862.5 525L737.5 650L612.5 525Z M862.5 275L987.5 400L862.5 525L737.5 400Z M1112.5 275L1237.5 400L1112.5 525L987.5 400Z M987.5 150L1112.5 275L987.5 400L862.5 275Z M1237.5 400L1362.5 525L1237.5 650L1112.5 525Z" />
-    </svg>
-
-    <header class="navbar">
+  <!-- Sticky navbar: takes no space in the flow, so it floats over the first hero -->
+  <header class="navbar site-nav">
+    <div class="site-nav-bar">
       <div class="container navbar-inner">
-        <a class="navbar-brand" href="index.html">
+        <a class="navbar-brand" href="#tools">
           <img src="assets/dianahub_logo.png" alt="DianaHub">
         </a>
 
         <nav class="navbar-links">
-          <a href="index.html" aria-current="page">Tools</a>
-          <a href="about.html">About Diana</a>
-          <a class="navbar-cta" href="help.html">Need help?</a>
+          <a href="#tools" aria-current="location">Tools</a>
+          <a href="#about">About Diana</a>
+          <a class="navbar-cta" href="#help">Need help?</a>
         </nav>
       </div>
-    </header>
+    </div>
+  </header>
 
-    <main class="container hero-content">
-      <h1>Tools by Digital Analytics LATAM</h1>
-
-      <a class="btn-primary" href="about.html">
-        Learn more
-        <svg viewBox="0 0 20 20" aria-hidden="true">
-          <path d="M3 10h13M11 5l5 5-5 5" />
+  <main>
+    <!-- Tools -->
+    <section id="tools" aria-label="Tools">
+      <div class="hero hero-home">
+        <svg class="hero-diamonds" viewBox="0 0 1300 600" preserveAspectRatio="xMaxYMax meet" aria-hidden="true">
+          <path
+            d="M237.5 425L362.5 550L237.5 675L112.5 550Z M487.5 425L612.5 550L487.5 675L362.5 550Z M737.5 400L862.5 525L737.5 650L612.5 525Z M862.5 275L987.5 400L862.5 525L737.5 400Z M1112.5 275L1237.5 400L1112.5 525L987.5 400Z M987.5 150L1112.5 275L987.5 400L862.5 275Z M1237.5 400L1362.5 525L1237.5 650L1112.5 525Z" />
         </svg>
-      </a>
-    </main>
-  </div>
 
-  <section class="tools">
-    <div class="container">
-      <div class="tools-inner">
-        <div class="tools-search">
-          <label class="visually-hidden" for="tool-search">Search tools</label>
-          <div class="tools-search-field">
+        <div class="container hero-content">
+          <h1>Tools by Digital Analytics LATAM</h1>
+
+          <a class="btn-primary" href="#about">
+            Learn more
             <svg viewBox="0 0 20 20" aria-hidden="true">
-              <circle cx="8.5" cy="8.5" r="5.5" />
-              <path d="M13 13l4 4" />
+              <path d="M3 10h13M11 5l5 5-5 5" />
             </svg>
-            <input id="tool-search" type="search" placeholder="Search tools, sectors…" autocomplete="off">
+          </a>
+        </div>
+      </div>
+
+      <div class="tools">
+        <div class="container">
+          <div class="tools-inner">
+            <div class="tools-search">
+              <label class="visually-hidden" for="tool-search">Search tools</label>
+              <div class="tools-search-field">
+                <svg viewBox="0 0 20 20" aria-hidden="true">
+                  <circle cx="8.5" cy="8.5" r="5.5" />
+                  <path d="M13 13l4 4" />
+                </svg>
+                <input id="tool-search" type="search" placeholder="Search tools, sectors…" autocomplete="off">
+              </div>
+            </div>
+
+            <div class="tools-grid">
+              <article class="tool-card">
+                <img class="tool-icon" src="assets/icons/factorstrat.png" alt="">
+                <h2><a class="tool-link" href="tools/factorstrat.html">FactorStrat</a></h2>
+                <p class="tool-desc">Find the drivers behind change in revenue or margin</p>
+                <div class="tool-card-actions">
+                  <a class="btn-primary" data-download="factorstrat">Download Installer</a>
+                  <a class="btn-secondary is-disabled" aria-disabled="true">Tutorial</a>
+                </div>
+              </article>
+
+              <article class="tool-card">
+                <img class="tool-icon" src="assets/icons/quickwins.svg" alt="">
+                <h2><a class="tool-link" href="tools/quickwins.html">QuickWins</a></h2>
+                <p class="tool-desc">UAT Pilot Coming November 12th</p>
+                <div class="tool-card-actions">
+                  <a class="btn-primary" data-download="quickwins">Download Installer</a>
+                  <a class="btn-secondary is-disabled" aria-disabled="true">Tutorial</a>
+                </div>
+              </article>
+
+              <article class="tool-card is-disabled">
+                <img class="tool-icon" src="assets/icons/compol.svg" alt="">
+                <h2><a class="tool-link" aria-disabled="true">Compol</a></h2>
+                <p class="tool-desc">Coming to you next</p>
+                <div class="tool-card-actions">
+                  <a class="btn-primary is-disabled" aria-disabled="true" data-download="compol">Download Installer</a>
+                  <a class="btn-secondary is-disabled" aria-disabled="true">Tutorial</a>
+                </div>
+              </article>
+            </div>
+
+            <p class="tools-empty" hidden>No tools match your search.</p>
           </div>
         </div>
-
-        <div class="tools-grid">
-          <article class="tool-card">
-            <img class="tool-icon" src="assets/icons/factorstrat.png" alt="">
-            <h2><a class="tool-link" href="tools/factorstrat.html">FactorStrat</a></h2>
-            <p class="tool-desc">Find the drivers behind change in revenue or margin</p>
-            <div class="tool-card-actions">
-              <a class="btn-primary" data-download="factorstrat">Download Installer</a>
-              <a class="btn-secondary is-disabled" aria-disabled="true">Tutorial</a>
-            </div>
-          </article>
-
-          <article class="tool-card">
-            <img class="tool-icon" src="assets/icons/quickwins.svg" alt="">
-            <h2><a class="tool-link" href="tools/quickwins.html">QuickWins</a></h2>
-            <p class="tool-desc">UAT Pilot Coming November 12th</p>
-            <div class="tool-card-actions">
-              <a class="btn-primary" data-download="quickwins">Download Installer</a>
-              <a class="btn-secondary is-disabled" aria-disabled="true">Tutorial</a>
-            </div>
-          </article>
-
-          <article class="tool-card is-disabled">
-            <img class="tool-icon" src="assets/icons/compol.svg" alt="">
-            <h2><a class="tool-link" aria-disabled="true">Compol</a></h2>
-            <p class="tool-desc">Coming to you next</p>
-            <div class="tool-card-actions">
-              <a class="btn-primary is-disabled" aria-disabled="true" data-download="compol">Download Installer</a>
-              <a class="btn-secondary is-disabled" aria-disabled="true">Tutorial</a>
-            </div>
-          </article>
-        </div>
-
-        <p class="tools-empty" hidden>No tools match your search.</p>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <!-- About Diana -->
+    <section id="about" aria-labelledby="about-heading">
+      <div class="page-body page-body-diamonds section-alt">
+        <div class="container">
+          <div class="page-inner">
+            <h2 class="section-heading" id="about-heading">Hello from Diana!</h2>
+
+            <div class="about-intro">
+              <div class="about-intro-text">
+                <p>We're a team of tech-minded consultants based in Latin America. Our goal is to make analysis
+                  faster, smarter, and deeper. Through our project work, we've built tools and methods that
+                  uncover sharper insights and automate tasks that aren't easily done in Excel. We're sharing
+                  them with the whole Simon-Kucher family to hopefully help your projects run a little
+                  smoother and aim a little higher.</p>
+
+                <p>Our name stands for Digital Analytics, and it's also a nod to La Diana Cazadora, the iconic
+                  Huntress statue in Mexico City, who's been taking aim since 1942.</p>
+              </div>
+
+              <figure class="about-intro-photo">
+                <img src="assets/diana-photo-1200.jpg" width="1200" height="800" loading="lazy"
+                  alt="La Diana Cazadora statue and fountain on Paseo de la Reforma, Mexico City">
+                <figcaption>La Diana Cazadora, Mexico City</figcaption>
+              </figure>
+            </div>
+
+            <h3 class="team-heading">Meet our team</h3>
+
+            <h4 class="team-group-heading">Leadership</h4>
+            <div class="team-grid">
+              <article class="team-member">
+                <img src="assets/headshots/guilherme_nami.png" alt="Guilherme Nami" loading="lazy">
+                <div class="team-member-info">
+                  <h5 class="team-name">Guilherme Nami</h5>
+                  <p class="team-position">Partner</p>
+                  <p class="team-location">AME – Santiago</p>
+                </div>
+              </article>
+              <article class="team-member">
+                <img src="assets/headshots/nicolas_bence.jpg" alt="Nicolas Bence" loading="lazy">
+                <div class="team-member-info">
+                  <h5 class="team-name">Nicolas Bence</h5>
+                  <p class="team-position">Partner</p>
+                  <p class="team-location">AME – Santiago</p>
+                </div>
+              </article>
+              <article class="team-member">
+                <img src="assets/headshots/carlos_sink.jpg" alt="Carlos Zink" loading="lazy">
+                <div class="team-member-info">
+                  <h5 class="team-name">Carlos Zink</h5>
+                  <p class="team-position">Senior Director</p>
+                  <p class="team-location">AME – São Paulo</p>
+                </div>
+              </article>
+              <article class="team-member">
+                <img src="assets/headshots/jorge_reyes.png" alt="Jorge Reyes Garcia" loading="lazy">
+                <div class="team-member-info">
+                  <h5 class="team-name">Jorge Reyes Garcia</h5>
+                  <p class="team-position">Director</p>
+                  <p class="team-location">AME – Mexico City</p>
+                </div>
+              </article>
+            </div>
+
+            <h4 class="team-group-heading">Solutions team</h4>
+            <div class="team-grid">
+              <article class="team-member">
+                <img src="assets/headshots/nicolas_bdill.jpg" alt="Nicolas Bdill" loading="lazy">
+                <div class="team-member-info">
+                  <h5 class="team-name">Nicolas Bdill</h5>
+                  <p class="team-position">Data Consultant</p>
+                  <p class="team-location">AME – Mexico City</p>
+                </div>
+              </article>
+              <article class="team-member">
+                <img src="assets/headshots/sofia_moreno.jpg" alt="Sofia Moreno Lopez" loading="lazy">
+                <div class="team-member-info">
+                  <h5 class="team-name">Sofia Moreno Lopez</h5>
+                  <p class="team-position">Software Engineer</p>
+                  <p class="team-location">AME – Mexico City</p>
+                </div>
+              </article>
+            </div>
+
+            <h4 class="team-group-heading">Core team</h4>
+            <div class="team-grid">
+              <article class="team-member">
+                <img src="assets/headshots/igor_franchini.png" alt="Igor Franchini" loading="lazy">
+                <div class="team-member-info">
+                  <h5 class="team-name">Igor Franchini</h5>
+                  <p class="team-position">Senior Consultant</p>
+                  <p class="team-location">AME – São Paulo</p>
+                </div>
+              </article>
+              <article class="team-member">
+                <img src="assets/headshots/matheus_immer.png" alt="Matheus Immer" loading="lazy">
+                <div class="team-member-info">
+                  <h5 class="team-name">Matheus Immer</h5>
+                  <p class="team-position">Senior Consultant</p>
+                  <p class="team-location">AME – São Paulo</p>
+                </div>
+              </article>
+              <article class="team-member">
+                <img src="assets/headshots/pedro_pires.jpg" alt="Pedro Pires Sulzer" loading="lazy">
+                <div class="team-member-info">
+                  <h5 class="team-name">Pedro Pires Sulzer</h5>
+                  <p class="team-position">Senior Consultant</p>
+                  <p class="team-location">AME – São Paulo</p>
+                </div>
+              </article>
+              <article class="team-member">
+                <img src="assets/headshots/david_cortina.png" alt="David Cortina" loading="lazy">
+                <div class="team-member-info">
+                  <h5 class="team-name">David Cortina</h5>
+                  <p class="team-position">Consultant</p>
+                  <p class="team-location">AME – Mexico City</p>
+                </div>
+              </article>
+              <article class="team-member">
+                <img src="assets/headshots/lucas_domeyko.png" alt="Lucas Domeyko" loading="lazy">
+                <div class="team-member-info">
+                  <h5 class="team-name">Lucas Domeyko</h5>
+                  <p class="team-position">Consultant</p>
+                  <p class="team-location">AME – Santiago</p>
+                </div>
+              </article>
+              <article class="team-member">
+                <img src="assets/headshots/martin_palacios.png" alt="Martin Palacios" loading="lazy">
+                <div class="team-member-info">
+                  <h5 class="team-name">Martin Palacios</h5>
+                  <p class="team-position">Consultant</p>
+                  <p class="team-location">AME – Mexico City</p>
+                </div>
+              </article>
+              <article class="team-member">
+                <img src="assets/headshots/ricardo_gonzales.png" alt="Ricardo Gonzales" loading="lazy">
+                <div class="team-member-info">
+                  <h5 class="team-name">Ricardo Gonzales</h5>
+                  <p class="team-position">Consultant</p>
+                  <p class="team-location">AME – Mexico City</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Need help? -->
+    <section id="help" aria-labelledby="help-heading">
+      <div class="page-body">
+        <div class="container">
+          <div class="page-inner">
+            <h2 class="section-heading" id="help-heading">Contact us</h2>
+
+            <div class="help-grid">
+              <div class="help-option">
+                <p class="help-topic">
+                  <svg viewBox="0 0 20 20" aria-hidden="true">
+                    <path d="M12.5 3.5a4 4 0 0 0-4.9 5.1L3.5 12.7a1.4 1.4 0 0 0 2 2l4.1-4.1a4 4 0 0 0 5.1-4.9l-2.3 2.3-2-.4-.4-2z" />
+                  </svg>
+                  Technical contact
+                </p>
+
+                <div class="help-person">
+                  <img src="assets/headshots/sofia_moreno.jpg" alt="" loading="lazy">
+                  <div>
+                    <p class="help-person-name">Sofia Moreno</p>
+                    <p class="help-person-role">Software Engineer · Mexico City</p>
+                  </div>
+                </div>
+
+                <div class="contact-actions">
+                  <a class="btn-primary" href="https://teams.microsoft.com/l/chat/0/0?users=sofia.moreno@simon-kucher.com" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 20 20" aria-hidden="true">
+                      <path d="M4 3.5h12a1.5 1.5 0 0 1 1.5 1.5v8a1.5 1.5 0 0 1-1.5 1.5H9l-4.5 3v-3H4A1.5 1.5 0 0 1 2.5 13V5A1.5 1.5 0 0 1 4 3.5z" />
+                    </svg>
+                    Message on Teams
+                  </a>
+                  <a class="btn-secondary" title="Copy sofia.moreno@simon-kucher.com" href="mailto:sofia.moreno@simon-kucher.com?subject=DianaHub%20-%20Tool%20issue">
+                    <svg viewBox="0 0 20 20" aria-hidden="true">
+                      <rect x="2.5" y="4.5" width="15" height="11" rx="1.5" />
+                      <path d="M3 5.5l7 5.5 7-5.5" />
+                    </svg>
+                    <span class="btn-label" aria-live="polite">Send an email</span>
+                  </a>
+                </div>
+              </div>
+
+              <div class="help-option">
+                <p class="help-topic">
+                  <svg viewBox="0 0 20 20" aria-hidden="true">
+                    <path d="M10 2.5a5 5 0 0 0-3 9v2h6v-2a5 5 0 0 0-3-9z M7.5 16h5 M8.5 18h3" />
+                  </svg>
+                  Business Contact
+                </p>
+
+                <div class="help-person">
+                  <img src="assets/headshots/jorge_reyes.png" alt="" loading="lazy">
+                  <div>
+                    <p class="help-person-name">Jorge Reyes</p>
+                    <p class="help-person-role">Director · Mexico City</p>
+                  </div>
+                </div>
+
+                <div class="contact-actions">
+                  <a class="btn-primary" title="Copy jorge.reyes@simon-kucher.com" href="mailto:jorge.reyes@simon-kucher.com?subject=DianaHub%20-%20Question">
+                    <svg viewBox="0 0 20 20" aria-hidden="true">
+                      <rect x="2.5" y="4.5" width="15" height="11" rx="1.5" />
+                      <path d="M3 5.5l7 5.5 7-5.5" />
+                    </svg>
+                    <span class="btn-label" aria-live="polite">Send an email</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <footer>
     <div class="container">
       <div class="footer-inner">
         <div class="footer-top">
           <nav class="footer-links" aria-label="Footer">
-            <a href="index.html">Tools</a>
-            <a href="about.html">About Diana</a>
-            <a href="help.html">Need help?</a>
+            <a href="#tools">Tools</a>
+            <a href="#about">About Diana</a>
+            <a href="#help">Need help?</a>
           </nav>
 
-          <a class="footer-brand" href="index.html">
+          <a class="footer-brand" href="#tools">
             <img src="assets/dianahub_logo.png" alt="DianaHub">
           </a>
         </div>
@@ -117,6 +396,7 @@
   </footer>
 
   <script>
+    // Tool search
     (function () {
       var input = document.getElementById("tool-search");
       var cards = document.querySelectorAll(".tool-card");
@@ -134,6 +414,70 @@
 
         empty.hidden = visible > 0;
       });
+    })();
+
+    // Sticky navbar: solid once the page scrolls, and the link for the section in view is highlighted
+    (function () {
+      var root = document.documentElement;
+      var nav = document.querySelector(".site-nav");
+      var bar = nav.querySelector(".site-nav-bar");
+      var links = nav.querySelectorAll(".navbar-links a");
+      var sections = Array.prototype.map.call(links, function (link) {
+        return document.querySelector(link.getAttribute("href"));
+      });
+
+      // The first hero leaves room for the full-size bar; anchors land just below the compact one
+      function measure() {
+        var stuck = nav.classList.contains("is-stuck");
+        nav.classList.add("no-transition");
+        nav.classList.remove("is-stuck");
+        root.style.setProperty("--nav-h", bar.offsetHeight + "px");
+        nav.classList.add("is-stuck");
+        root.style.setProperty("--nav-stuck-h", bar.offsetHeight + "px");
+        nav.classList.toggle("is-stuck", stuck);
+        bar.offsetHeight; // apply the restored state before transitions come back
+        nav.classList.remove("no-transition");
+      }
+
+      function update() {
+        nav.classList.toggle("is-stuck", window.scrollY > 0);
+
+        // The current section is the last one whose top has passed a line a third of the way down
+        var line = window.innerHeight / 3;
+        var current = 0;
+        sections.forEach(function (section, i) {
+          if (section.getBoundingClientRect().top <= line) current = i;
+        });
+        // At the very bottom, the last (short) section counts as current
+        if (window.innerHeight + window.scrollY >= root.scrollHeight - 2) current = sections.length - 1;
+
+        links.forEach(function (link, i) {
+          if (i === current) link.setAttribute("aria-current", "location");
+          else link.removeAttribute("aria-current");
+        });
+      }
+
+      var ticking = false;
+      window.addEventListener("scroll", function () {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function () {
+          ticking = false;
+          update();
+        });
+      }, { passive: true });
+
+      function remeasure() {
+        measure();
+        update();
+      }
+
+      window.addEventListener("resize", remeasure);
+      // The web font can change the bar's height once it loads
+      window.addEventListener("load", remeasure);
+
+      measure();
+      update();
     })();
   </script>
 </body>
