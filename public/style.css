@@ -1050,6 +1050,12 @@ html {
   margin-top: 8px;
 }
 
+.tool-panel p + ul,
+.tool-panel ul + p,
+.tool-panel p + p {
+  margin-top: 12px;
+}
+
 .tool-video {
   align-items: center;
   aspect-ratio: 16 / 9;
